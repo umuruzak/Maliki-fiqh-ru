@@ -1,32 +1,22 @@
-/* ============================================================================
-   МАЛИКИТСКИЙ ФИКХ — ЕДИНЫЙ СТИЛЬ
-   Эстетика: чёрно-белый пэчворк Baye Fall (лоскутные геометрические мотивы,
-   крупная типографика, контрастные рамки).
-   ============================================================================ */
-
-/* ---------- 1. ПЕРЕМЕННЫЕ (CSS Custom Properties) ---------- */
 :root {
   --black: #0a0a0a;
   --white: #fafafa;
   --gray:  #e8e8e8;
   --gray-mid: #888;
   --gray-dark: #2a2a2a;
-
-  /* Высота нижней панели плеера — используется в body padding-bottom */
   --player-height: 90px;
 }
 
-/* ---------- 2. СБРОС И БАЗА ---------- */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;                 /* удобная модель ширины */
-  -webkit-tap-highlight-color: transparent; /* убираем синий тап-хайлайт */
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
-  scroll-behavior: smooth;                /* плавная прокрутка к якорям */
-  scroll-padding-top: 90px;               /* чтобы шапка не перекрывала контент */
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
@@ -35,13 +25,11 @@ body {
   color: var(--black);
   line-height: 1.7;
   overflow-x: hidden;
-  /* Отступ снизу, чтобы контент не прятался за фиксированным плеером */
   padding-bottom: 0;
   transition: padding-bottom 0.35s ease;
 }
 body.has-player { padding-bottom: var(--player-height); }
 
-/* ---------- 3. ПЭЧВОРК-ФОН (диагональная штриховка) ---------- */
 .patchwork-bg {
   background-color: var(--white);
   background-image:
@@ -49,7 +37,6 @@ body.has-player { padding-bottom: var(--player-height); }
     repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(0,0,0,0.03) 20px, rgba(0,0,0,0.03) 22px);
 }
 
-/* ---------- 4. ШАПКА ---------- */
 header {
   position: sticky;
   top: 0;
@@ -68,7 +55,6 @@ header {
   align-items: center;
 }
 
-/* Логотип-ссылка */
 .logo {
   text-decoration: none;
   color: var(--white);
@@ -77,7 +63,6 @@ header {
   gap: 0.8rem;
 }
 
-/* Квадратный мотив из 4 клеток (символ пэчворка) */
 .logo-mark {
   width: 36px;
   height: 36px;
@@ -100,7 +85,6 @@ header {
   line-height: 1.1;
 }
 
-/* ---------- 5. НАВИГАЦИЯ ---------- */
 nav#nav ul {
   list-style: none;
   display: flex;
@@ -120,11 +104,10 @@ nav#nav a {
 }
 
 nav#nav a:hover,
-nav#nav a.active {              /* активный пункт меню */
+nav#nav a.active {
   border-bottom-color: var(--white);
 }
 
-/* ---------- 6. БУРГЕР (только для мобильных) ---------- */
 .burger {
   display: none;
   background: none;
@@ -150,14 +133,12 @@ nav#nav a.active {              /* активный пункт меню */
 .burger span:nth-child(2) { top: 23px; }
 .burger span:nth-child(3) { top: 32px; }
 
-/* Превращение в крестик при открытом меню */
 .burger.is-active { background: var(--white); }
 .burger.is-active span { background: var(--black); }
 .burger.is-active span:nth-child(1) { top: 23px; transform: translateX(-50%) rotate(45deg); }
 .burger.is-active span:nth-child(2) { opacity: 0; }
 .burger.is-active span:nth-child(3) { top: 23px; transform: translateX(-50%) rotate(-45deg); }
 
-/* ---------- 7. HERO (главная страница) ---------- */
 .hero {
   background: var(--black);
   color: var(--white);
@@ -165,7 +146,6 @@ nav#nav a.active {              /* активный пункт меню */
   position: relative;
   overflow: hidden;
 }
-/* Геометрический декор в правом верхнем углу */
 .hero::before {
   content: '';
   position: absolute;
@@ -224,7 +204,6 @@ nav#nav a.active {              /* активный пункт меню */
   margin-bottom: 2.5rem;
 }
 
-/* ---------- 8. КНОПКИ ---------- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -244,7 +223,6 @@ nav#nav a.active {              /* активный пункт меню */
 }
 .btn:hover { background: var(--white); color: var(--black); }
 
-/* Кнопка на светлом фоне */
 .btn-dark {
   border-color: var(--black);
   color: var(--black);
@@ -253,7 +231,6 @@ nav#nav a.active {              /* активный пункт меню */
 
 .btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-/* ---------- 9. СЕКЦИИ ---------- */
 section { padding: 6rem 2rem; }
 .container { max-width: 1200px; margin: 0 auto; }
 
@@ -284,19 +261,16 @@ section { padding: 6rem 2rem; }
   min-width: 250px;
 }
 
-/* Тёмная секция (для контраста) */
 .section-dark { background: var(--black); color: var(--white); }
 .section-dark .section-header { border-bottom-color: var(--white); }
 .section-dark .section-num { border-color: var(--white); }
 
-/* ---------- 10. КАРТОЧКИ РАЗДЕЛОВ НА ГЛАВНОЙ ---------- */
 .sections-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2rem;
 }
 
-/* Общий стиль кликабельной карточки */
 .section-card {
   display: flex;
   flex-direction: column;
@@ -318,7 +292,6 @@ section { padding: 6rem 2rem; }
   color: var(--white);
 }
 
-/* Уголок-паттерн в правом верхнем углу */
 .section-card::after {
   content: '';
   position: absolute;
@@ -363,7 +336,6 @@ section { padding: 6rem 2rem; }
   align-self: flex-end;
 }
 
-/* ---------- 11. СЕТКА «КНИГИ» (переводы) ---------- */
 .books-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -386,7 +358,6 @@ section { padding: 6rem 2rem; }
   box-shadow: 8px 8px 0 var(--black);
 }
 
-/* Полоска-«корешок» сверху карточки */
 .book-spine {
   height: 8px;
   background: repeating-linear-gradient(
@@ -414,7 +385,6 @@ section { padding: 6rem 2rem; }
   margin-bottom: 1.2rem;
 }
 
-/* Метка «скачать» */
 .download-tag {
   font-family: 'Courier New', monospace;
   font-size: 0.75rem;
@@ -426,7 +396,6 @@ section { padding: 6rem 2rem; }
   justify-content: space-between;
 }
 
-/* ---------- 12. СПИСОК АУДИО (лекции/рецитации) ---------- */
 .audio-list {
   display: flex;
   flex-direction: column;
@@ -444,7 +413,6 @@ section { padding: 6rem 2rem; }
 }
 .audio-row:hover { background: var(--gray); }
 
-/* Номер трека */
 .audio-row .num {
   font-family: 'Courier New', monospace;
   font-weight: 900;
@@ -474,7 +442,6 @@ section { padding: 6rem 2rem; }
   text-transform: uppercase;
 }
 
-/* Кнопки «Скачать» / «Слушать» */
 .audio-actions {
   display: flex;
   gap: 0.6rem;
@@ -503,7 +470,6 @@ section { padding: 6rem 2rem; }
 .audio-btn.play { background: var(--black); color: var(--white); }
 .audio-btn.play:hover { background: var(--white); color: var(--black); }
 
-/* Иконка «треугольник» для воспроизведения */
 .audio-btn .icon-play {
   width: 0; height: 0;
   border-left: 8px solid currentColor;
@@ -511,7 +477,6 @@ section { padding: 6rem 2rem; }
   border-bottom: 5px solid transparent;
 }
 
-/* ---------- 13. НИЖНЯЯ ПАНЕЛЬ ПЛЕЕРА ---------- */
 .player {
   position: fixed;
   left: 0;
@@ -521,7 +486,7 @@ section { padding: 6rem 2rem; }
   color: var(--white);
   border-top: 3px solid var(--white);
   padding: 0.9rem 1.5rem;
-  display: none;                 /* скрыт, пока не выбран трек */
+  display: none;
   align-items: center;
   gap: 1rem;
   z-index: 300;
@@ -529,12 +494,11 @@ section { padding: 6rem 2rem; }
 }
 .player.is-visible { display: flex; }
 
-/* Левая часть: обложка-«квадрат» + название */
 .player-info {
   display: flex;
   align-items: center;
   gap: 0.9rem;
-  min-width: 0;                  /* чтобы текст обрезался */
+  min-width: 0;
   flex: 1;
 }
 
@@ -557,7 +521,7 @@ section { padding: 6rem 2rem; }
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;      /* обрезаем длинные названия через «…» */
+  text-overflow: ellipsis;
 }
 .player-titles .subtitle {
   font-family: 'Courier New', monospace;
@@ -570,7 +534,6 @@ section { padding: 6rem 2rem; }
   text-overflow: ellipsis;
 }
 
-/* Центральная часть: кнопка play/pause */
 .player-controls {
   display: flex;
   align-items: center;
@@ -592,7 +555,6 @@ section { padding: 6rem 2rem; }
 }
 .player-btn:hover { background: var(--white); color: var(--black); }
 
-/* Иконки play/pause рисуем через CSS-фигуры */
 .icon-play-css {
   width: 0; height: 0;
   border-left: 12px solid currentColor;
@@ -607,7 +569,6 @@ section { padding: 6rem 2rem; }
   box-sizing: border-box;
 }
 
-/* Правая часть: время и полоса прогресса */
 .player-progress {
   display: flex;
   align-items: center;
@@ -625,7 +586,6 @@ section { padding: 6rem 2rem; }
   text-align: center;
 }
 
-/* Полоса прогресса */
 .progress-bar {
   flex: 1;
   height: 6px;
@@ -633,15 +593,15 @@ section { padding: 6rem 2rem; }
   position: relative;
   cursor: pointer;
 }
-.progress-bar::before {          /* «заполненная» часть */
+.progress-bar::before {
   content: '';
   position: absolute;
   top: 0; left: 0;
   height: 100%;
-  width: var(--progress, 0%);    /* управляется из JS */
+  width: var(--progress, 0%);
   background: var(--white);
 }
-.progress-bar::after {           /* «маркер» ползунка */
+.progress-bar::after {
   content: '';
   position: absolute;
   top: 50%; left: var(--progress, 0%);
@@ -653,7 +613,6 @@ section { padding: 6rem 2rem; }
   pointer-events: none;
 }
 
-/* Кнопка закрытия плеера */
 .player-close {
   background: none;
   border: none;
@@ -665,7 +624,6 @@ section { padding: 6rem 2rem; }
 }
 .player-close:hover { color: var(--white); }
 
-/* ---------- 14. ССЫЛКИ ---------- */
 .links-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -708,7 +666,6 @@ section { padding: 6rem 2rem; }
   text-transform: uppercase;
 }
 
-/* ---------- 15. АЛИМЫ (список) ---------- */
 .scholars-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -735,7 +692,6 @@ section { padding: 6rem 2rem; }
   color: var(--white);
 }
 
-/* Портрет-заглушка (квадрат с паттерном) */
 .scholar-portrait {
   width: 120px;
   height: 120px;
@@ -759,7 +715,6 @@ section { padding: 6rem 2rem; }
   opacity: 0.75;
 }
 
-/* ---------- 16. ГАЛЕРЕЯ (страница алима) ---------- */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -767,7 +722,7 @@ section { padding: 6rem 2rem; }
 }
 
 .gallery-thumb {
-  aspect-ratio: 1 / 1;           /* квадратные миниатюры */
+  aspect-ratio: 1 / 1;
   border: 2px solid var(--black);
   background: var(--gray);
   cursor: pointer;
@@ -783,7 +738,6 @@ section { padding: 6rem 2rem; }
   transform: translate(-3px, -3px);
   box-shadow: 6px 6px 0 var(--black);
 }
-/* Плейсхолдер, если нет реального изображения */
 .gallery-thumb .placeholder {
   font-family: 'Courier New', monospace;
   font-size: 0.7rem;
@@ -799,10 +753,9 @@ section { padding: 6rem 2rem; }
   display: block;
 }
 
-/* ---------- 17. ЛАЙТБОКС (просмотр фото) ---------- */
 .lightbox {
   position: fixed;
-  inset: 0;                       /* top/right/bottom/left = 0 */
+  inset: 0;
   background: rgba(10,10,10,0.96);
   display: none;
   align-items: center;
@@ -842,7 +795,6 @@ section { padding: 6rem 2rem; }
   padding: 2rem;
 }
 
-/* Кнопки навигации */
 .lightbox-btn {
   position: absolute;
   top: 50%;
@@ -864,7 +816,6 @@ section { padding: 6rem 2rem; }
 .lightbox-prev { left: -70px; }
 .lightbox-next { right: -70px; }
 
-/* Кнопка закрытия */
 .lightbox-close {
   position: absolute;
   top: 1.5rem;
@@ -879,7 +830,6 @@ section { padding: 6rem 2rem; }
 }
 .lightbox-close:hover { background: var(--white); color: var(--black); }
 
-/* Счётчик слайдов */
 .lightbox-counter {
   position: absolute;
   bottom: 1.5rem;
@@ -891,7 +841,6 @@ section { padding: 6rem 2rem; }
   letter-spacing: 2px;
 }
 
-/* ---------- 18. ХЛЕБНЫЕ КРОШКИ ---------- */
 .breadcrumbs {
   max-width: 1200px;
   margin: 0 auto;
@@ -909,7 +858,6 @@ section { padding: 6rem 2rem; }
 .breadcrumbs a:hover { color: var(--black); border-bottom-color: var(--black); }
 .breadcrumbs span { color: var(--black); }
 
-/* ---------- 19. ПОДЗАГОЛОВОК СТРАНИЦЫ ---------- */
 .page-title {
   max-width: 1200px;
   margin: 0 auto;
@@ -931,7 +879,6 @@ section { padding: 6rem 2rem; }
   margin-top: 0.8rem;
 }
 
-/* ---------- 20. ФУТЕР ---------- */
 footer {
   background: var(--black);
   color: var(--white);
@@ -986,13 +933,11 @@ footer li a:hover { color: var(--white); }
   gap: 1rem;
 }
 
-/* ---------- 21. АДАПТИВ ---------- */
 @media (max-width: 1024px) {
   .footer-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 768px) {
-  /* Бургер появляется, меню прячется в оверлей */
   .burger { display: block; }
 
   nav#nav {
@@ -1022,7 +967,6 @@ footer li a:hover { color: var(--white); }
 
   body.menu-open { overflow: hidden; }
 
-  /* Прочие мобильные правки */
   section { padding: 3.5rem 1.1rem; }
   .hero { padding: 3rem 1.1rem 3.5rem; }
   .hero::before { width: 250px; height: 250px; opacity: 0.05; }
@@ -1050,13 +994,11 @@ footer li a:hover { color: var(--white); }
     gap: 1.2rem;
   }
 
-  /* Карточки — компактнее */
   .section-card,
   .book-card,
   .link-card,
   .scholar-card { padding: 1.4rem; }
 
-  /* Аудио-строки: выстраиваем в колонку */
   .audio-row {
     flex-direction: column;
     align-items: flex-start;
@@ -1068,7 +1010,6 @@ footer li a:hover { color: var(--white); }
   .audio-actions { width: 100%; }
   .audio-actions .audio-btn { flex: 1; }
 
-  /* Плеер: прячем прогресс-бар на маленьких экранах или упрощаем */
   .player {
     padding: 0.7rem 0.9rem;
     gap: 0.6rem;
@@ -1080,7 +1021,6 @@ footer li a:hover { color: var(--white); }
   .player-cover { width: 40px; height: 40px; }
   .player-btn { width: 40px; height: 40px; }
 
-  /* Лайтбокс: кнопки внутри, а не снаружи */
   .lightbox-prev { left: 0.5rem; }
   .lightbox-next { right: 0.5rem; }
   .lightbox-btn { width: 46px; height: 46px; font-size: 1.3rem; }
@@ -1090,7 +1030,6 @@ footer li a:hover { color: var(--white); }
   .footer-bottom { flex-direction: column; text-align: center; }
 }
 
-/* Отключаем hover-эффекты на тач-устройствах */
 @media (hover: none) {
   .section-card:hover,
   .book-card:hover,
@@ -1102,5 +1041,4 @@ footer li a:hover { color: var(--white); }
     background: inherit;
     color: inherit;
   }
-  /* Но оставляем :active для фидбека */
 }
