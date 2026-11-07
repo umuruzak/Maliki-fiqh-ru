@@ -1,0 +1,1106 @@
+/* ============================================================================
+   МАЛИКИТСКИЙ ФИКХ — ЕДИНЫЙ СТИЛЬ
+   Эстетика: чёрно-белый пэчворк Baye Fall (лоскутные геометрические мотивы,
+   крупная типографика, контрастные рамки).
+   ============================================================================ */
+
+/* ---------- 1. ПЕРЕМЕННЫЕ (CSS Custom Properties) ---------- */
+:root {
+  --black: #0a0a0a;
+  --white: #fafafa;
+  --gray:  #e8e8e8;
+  --gray-mid: #888;
+  --gray-dark: #2a2a2a;
+
+  /* Высота нижней панели плеера — используется в body padding-bottom */
+  --player-height: 90px;
+}
+
+/* ---------- 2. СБРОС И БАЗА ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;                 /* удобная модель ширины */
+  -webkit-tap-highlight-color: transparent; /* убираем синий тап-хайлайт */
+}
+
+html {
+  scroll-behavior: smooth;                /* плавная прокрутка к якорям */
+  scroll-padding-top: 90px;               /* чтобы шапка не перекрывала контент */
+}
+
+body {
+  font-family: Georgia, 'Times New Roman', serif;
+  background: var(--white);
+  color: var(--black);
+  line-height: 1.7;
+  overflow-x: hidden;
+  /* Отступ снизу, чтобы контент не прятался за фиксированным плеером */
+  padding-bottom: 0;
+  transition: padding-bottom 0.35s ease;
+}
+body.has-player { padding-bottom: var(--player-height); }
+
+/* ---------- 3. ПЭЧВОРК-ФОН (диагональная штриховка) ---------- */
+.patchwork-bg {
+  background-color: var(--white);
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(0,0,0,0.03) 20px, rgba(0,0,0,0.03) 22px),
+    repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(0,0,0,0.03) 20px, rgba(0,0,0,0.03) 22px);
+}
+
+/* ---------- 4. ШАПКА ---------- */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--black);
+  color: var(--white);
+  border-bottom: 3px solid var(--white);
+}
+
+.nav-wrap {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Логотип-ссылка */
+.logo {
+  text-decoration: none;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+/* Квадратный мотив из 4 клеток (символ пэчворка) */
+.logo-mark {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--white);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  flex-shrink: 0;
+}
+.logo-mark span { border: 1px solid var(--white); }
+.logo-mark span:nth-child(1) { background: var(--white); }
+.logo-mark span:nth-child(4) { background: var(--white); }
+
+.logo-text {
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  font-size: 0.95rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+/* ---------- 5. НАВИГАЦИЯ ---------- */
+nav#nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.6rem;
+}
+
+nav#nav a {
+  color: var(--white);
+  text-decoration: none;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s;
+}
+
+nav#nav a:hover,
+nav#nav a.active {              /* активный пункт меню */
+  border-bottom-color: var(--white);
+}
+
+/* ---------- 6. БУРГЕР (только для мобильных) ---------- */
+.burger {
+  display: none;
+  background: none;
+  border: 2px solid var(--white);
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  position: relative;
+  z-index: 200;
+  transition: background 0.3s;
+}
+
+.burger span {
+  position: absolute;
+  left: 50%;
+  width: 22px;
+  height: 2px;
+  background: var(--white);
+  transform: translateX(-50%);
+  transition: all 0.35s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.burger span:nth-child(1) { top: 14px; }
+.burger span:nth-child(2) { top: 23px; }
+.burger span:nth-child(3) { top: 32px; }
+
+/* Превращение в крестик при открытом меню */
+.burger.is-active { background: var(--white); }
+.burger.is-active span { background: var(--black); }
+.burger.is-active span:nth-child(1) { top: 23px; transform: translateX(-50%) rotate(45deg); }
+.burger.is-active span:nth-child(2) { opacity: 0; }
+.burger.is-active span:nth-child(3) { top: 23px; transform: translateX(-50%) rotate(-45deg); }
+
+/* ---------- 7. HERO (главная страница) ---------- */
+.hero {
+  background: var(--black);
+  color: var(--white);
+  padding: 6rem 2rem 5rem;
+  position: relative;
+  overflow: hidden;
+}
+/* Геометрический декор в правом верхнем углу */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 400px; height: 400px;
+  background-image:
+    linear-gradient(45deg, var(--white) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--white) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--white) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--white) 75%);
+  background-size: 40px 40px;
+  background-position: 0 0, 0 20px, 20px -20px, -20px 0;
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-label {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: inline-block;
+  border: 1px solid var(--white);
+  padding: 0.4rem 1rem;
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  line-height: 1.05;
+  font-weight: 900;
+  letter-spacing: -1px;
+  margin-bottom: 2rem;
+  max-width: 900px;
+}
+.hero h1 em {
+  font-style: italic;
+  font-weight: 400;
+  display: block;
+  font-size: 0.5em;
+  letter-spacing: 2px;
+  margin-top: 1rem;
+  color: var(--gray);
+}
+.hero p {
+  font-size: 1.15rem;
+  max-width: 620px;
+  color: var(--gray);
+  margin-bottom: 2.5rem;
+}
+
+/* ---------- 8. КНОПКИ ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.9rem 2rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid var(--white);
+  transition: all 0.3s;
+  cursor: pointer;
+  background: transparent;
+  color: var(--white);
+}
+.btn:hover { background: var(--white); color: var(--black); }
+
+/* Кнопка на светлом фоне */
+.btn-dark {
+  border-color: var(--black);
+  color: var(--black);
+}
+.btn-dark:hover { background: var(--black); color: var(--white); }
+
+.btn-group { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* ---------- 9. СЕКЦИИ ---------- */
+section { padding: 6rem 2rem; }
+.container { max-width: 1200px; margin: 0 auto; }
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+  border-bottom: 3px solid var(--black);
+  padding-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.section-num {
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  border: 2px solid var(--black);
+  padding: 0.3rem 0.8rem;
+}
+.section-header h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  line-height: 1;
+  flex: 1;
+  min-width: 250px;
+}
+
+/* Тёмная секция (для контраста) */
+.section-dark { background: var(--black); color: var(--white); }
+.section-dark .section-header { border-bottom-color: var(--white); }
+.section-dark .section-num { border-color: var(--white); }
+
+/* ---------- 10. КАРТОЧКИ РАЗДЕЛОВ НА ГЛАВНОЙ ---------- */
+.sections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* Общий стиль кликабельной карточки */
+.section-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 220px;
+  padding: 2rem;
+  border: 2px solid var(--black);
+  background: var(--white);
+  color: var(--black);
+  text-decoration: none;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
+}
+.section-card:hover,
+.section-card:active {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0 var(--black);
+  background: var(--black);
+  color: var(--white);
+}
+
+/* Уголок-паттерн в правом верхнем углу */
+.section-card::after {
+  content: '';
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 30px; height: 30px;
+  background-image:
+    linear-gradient(45deg, currentColor 25%, transparent 25%),
+    linear-gradient(-45deg, currentColor 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, currentColor 75%),
+    linear-gradient(-45deg, transparent 75%, currentColor 75%);
+  background-size: 10px 10px;
+  opacity: 0.35;
+}
+
+.section-card .tag {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  padding: 0.2rem 0.6rem;
+  display: inline-block;
+  align-self: flex-start;
+  margin-bottom: 1rem;
+}
+
+.section-card h3 {
+  font-size: 1.6rem;
+  line-height: 1.2;
+  margin-bottom: 0.6rem;
+}
+
+.section-card p {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-bottom: 1rem;
+}
+
+.section-card .arrow {
+  font-family: 'Courier New', monospace;
+  font-size: 1.4rem;
+  align-self: flex-end;
+}
+
+/* ---------- 11. СЕТКА «КНИГИ» (переводы) ---------- */
+.books-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  border: 2px solid var(--black);
+  background: var(--white);
+  text-decoration: none;
+  color: var(--black);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.book-card:hover,
+.book-card:active {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0 var(--black);
+}
+
+/* Полоска-«корешок» сверху карточки */
+.book-spine {
+  height: 8px;
+  background: repeating-linear-gradient(
+    90deg, var(--black) 0, var(--black) 6px,
+    transparent 6px, transparent 12px
+  );
+  margin-bottom: 1.2rem;
+}
+
+.book-card h3 { font-size: 1.3rem; margin-bottom: 0.4rem; }
+
+.book-card .author {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray-mid);
+  margin-bottom: 1rem;
+}
+
+.book-card .description {
+  font-size: 0.9rem;
+  color: var(--gray-dark);
+  flex: 1;
+  margin-bottom: 1.2rem;
+}
+
+/* Метка «скачать» */
+.download-tag {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-top: 1px solid var(--black);
+  padding-top: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* ---------- 12. СПИСОК АУДИО (лекции/рецитации) ---------- */
+.audio-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.audio-row {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.2rem 1.5rem;
+  border: 2px solid var(--black);
+  background: var(--white);
+  flex-wrap: wrap;
+}
+.audio-row:hover { background: var(--gray); }
+
+/* Номер трека */
+.audio-row .num {
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  font-size: 1.1rem;
+  min-width: 40px;
+  height: 40px;
+  border: 2px solid var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.audio-row .info {
+  flex: 1;
+  min-width: 200px;
+}
+.audio-row .info h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.2rem;
+}
+.audio-row .info .duration {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  color: var(--gray-mid);
+  text-transform: uppercase;
+}
+
+/* Кнопки «Скачать» / «Слушать» */
+.audio-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.audio-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 42px;
+  padding: 0.6rem 1rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: 2px solid var(--black);
+  background: var(--white);
+  color: var(--black);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.audio-btn:hover { background: var(--black); color: var(--white); }
+.audio-btn.play { background: var(--black); color: var(--white); }
+.audio-btn.play:hover { background: var(--white); color: var(--black); }
+
+/* Иконка «треугольник» для воспроизведения */
+.audio-btn .icon-play {
+  width: 0; height: 0;
+  border-left: 8px solid currentColor;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+/* ---------- 13. НИЖНЯЯ ПАНЕЛЬ ПЛЕЕРА ---------- */
+.player {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--black);
+  color: var(--white);
+  border-top: 3px solid var(--white);
+  padding: 0.9rem 1.5rem;
+  display: none;                 /* скрыт, пока не выбран трек */
+  align-items: center;
+  gap: 1rem;
+  z-index: 300;
+  box-shadow: 0 -8px 24px rgba(0,0,0,0.25);
+}
+.player.is-visible { display: flex; }
+
+/* Левая часть: обложка-«квадрат» + название */
+.player-info {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  min-width: 0;                  /* чтобы текст обрезался */
+  flex: 1;
+}
+
+.player-cover {
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--white);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  flex-shrink: 0;
+}
+.player-cover span { border: 1px solid var(--white); }
+.player-cover span:nth-child(1) { background: var(--white); }
+.player-cover span:nth-child(4) { background: var(--white); }
+
+.player-titles { min-width: 0; }
+.player-titles .title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;      /* обрезаем длинные названия через «…» */
+}
+.player-titles .subtitle {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  color: var(--gray-mid);
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Центральная часть: кнопка play/pause */
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-shrink: 0;
+}
+
+.player-btn {
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--white);
+  background: transparent;
+  color: var(--white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s, color 0.25s;
+}
+.player-btn:hover { background: var(--white); color: var(--black); }
+
+/* Иконки play/pause рисуем через CSS-фигуры */
+.icon-play-css {
+  width: 0; height: 0;
+  border-left: 12px solid currentColor;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  margin-left: 3px;
+}
+.icon-pause-css {
+  width: 12px; height: 16px;
+  border-left: 4px solid currentColor;
+  border-right: 4px solid currentColor;
+  box-sizing: border-box;
+}
+
+/* Правая часть: время и полоса прогресса */
+.player-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex: 2;
+  min-width: 160px;
+}
+
+.player-time {
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  color: var(--gray-mid);
+  min-width: 42px;
+  text-align: center;
+}
+
+/* Полоса прогресса */
+.progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--gray-dark);
+  position: relative;
+  cursor: pointer;
+}
+.progress-bar::before {          /* «заполненная» часть */
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  height: 100%;
+  width: var(--progress, 0%);    /* управляется из JS */
+  background: var(--white);
+}
+.progress-bar::after {           /* «маркер» ползунка */
+  content: '';
+  position: absolute;
+  top: 50%; left: var(--progress, 0%);
+  width: 14px; height: 14px;
+  background: var(--white);
+  border: 2px solid var(--black);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Кнопка закрытия плеера */
+.player-close {
+  background: none;
+  border: none;
+  color: var(--gray-mid);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0 0.4rem;
+  flex-shrink: 0;
+}
+.player-close:hover { color: var(--white); }
+
+/* ---------- 14. ССЫЛКИ ---------- */
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.8rem;
+  border: 2px solid var(--black);
+  background: var(--white);
+  text-decoration: none;
+  color: var(--black);
+  transition: all 0.3s;
+}
+.link-card:hover,
+.link-card:active { background: var(--black); color: var(--white); }
+
+.link-icon {
+  width: 48px;
+  height: 48px;
+  border: 2px solid currentColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', monospace;
+  font-weight: 900;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.link-card h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
+.link-card p {
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+/* ---------- 15. АЛИМЫ (список) ---------- */
+.scholars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 2rem;
+}
+
+.scholar-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  border: 2px solid var(--black);
+  background: var(--white);
+  text-decoration: none;
+  color: var(--black);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s, background 0.3s, color 0.3s;
+}
+.scholar-card:hover,
+.scholar-card:active {
+  transform: translate(-4px, -4px);
+  box-shadow: 8px 8px 0 var(--black);
+  background: var(--black);
+  color: var(--white);
+}
+
+/* Портрет-заглушка (квадрат с паттерном) */
+.scholar-portrait {
+  width: 120px;
+  height: 120px;
+  border: 3px solid currentColor;
+  margin-bottom: 1.2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  overflow: hidden;
+}
+.scholar-portrait span { border: 1px solid currentColor; }
+.scholar-portrait span:nth-child(1),
+.scholar-portrait span:nth-child(4) { background: currentColor; }
+
+.scholar-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+.scholar-card .dates {
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+/* ---------- 16. ГАЛЕРЕЯ (страница алима) ---------- */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.gallery-thumb {
+  aspect-ratio: 1 / 1;           /* квадратные миниатюры */
+  border: 2px solid var(--black);
+  background: var(--gray);
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.gallery-thumb:hover,
+.gallery-thumb:active {
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 var(--black);
+}
+/* Плейсхолдер, если нет реального изображения */
+.gallery-thumb .placeholder {
+  font-family: 'Courier New', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gray-mid);
+  padding: 1rem;
+  text-align: center;
+}
+.gallery-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- 17. ЛАЙТБОКС (просмотр фото) ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;                       /* top/right/bottom/left = 0 */
+  background: rgba(10,10,10,0.96);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  padding: 1.5rem;
+}
+.lightbox.is-open { display: flex; }
+
+.lightbox-stage {
+  max-width: 90vw;
+  max-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.lightbox-stage img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border: 3px solid var(--white);
+  object-fit: contain;
+}
+.lightbox-stage .placeholder {
+  width: min(80vw, 500px);
+  aspect-ratio: 1 / 1;
+  border: 3px solid var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-family: 'Courier New', monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Кнопки навигации */
+.lightbox-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 56px;
+  height: 56px;
+  background: var(--black);
+  color: var(--white);
+  border: 2px solid var(--white);
+  cursor: pointer;
+  font-size: 1.6rem;
+  font-family: 'Courier New', monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s, color 0.25s;
+}
+.lightbox-btn:hover { background: var(--white); color: var(--black); }
+.lightbox-prev { left: -70px; }
+.lightbox-next { right: -70px; }
+
+/* Кнопка закрытия */
+.lightbox-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 52px;
+  height: 52px;
+  background: var(--black);
+  color: var(--white);
+  border: 2px solid var(--white);
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+.lightbox-close:hover { background: var(--white); color: var(--black); }
+
+/* Счётчик слайдов */
+.lightbox-counter {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Courier New', monospace;
+  color: var(--white);
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+}
+
+/* ---------- 18. ХЛЕБНЫЕ КРОШКИ ---------- */
+.breadcrumbs {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem 0;
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.breadcrumbs a {
+  color: var(--gray-mid);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.breadcrumbs a:hover { color: var(--black); border-bottom-color: var(--black); }
+.breadcrumbs span { color: var(--black); }
+
+/* ---------- 19. ПОДЗАГОЛОВОК СТРАНИЦЫ ---------- */
+.page-title {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem 3rem;
+}
+.page-title h1 {
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: 900;
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+.page-title .subtitle {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gray-mid);
+  margin-top: 0.8rem;
+}
+
+/* ---------- 20. ФУТЕР ---------- */
+footer {
+  background: var(--black);
+  color: var(--white);
+  padding: 4rem 2rem 2rem;
+  border-top: 3px solid var(--white);
+}
+.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+.footer-brand .logo { margin-bottom: 1rem; }
+.footer-brand p {
+  color: var(--gray);
+  font-size: 0.9rem;
+  max-width: 300px;
+}
+footer h4 {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid var(--gray-dark);
+  padding-bottom: 0.6rem;
+}
+footer ul { list-style: none; }
+footer li { margin-bottom: 0.7rem; }
+footer li a {
+  color: var(--gray);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.3s;
+}
+footer li a:hover { color: var(--white); }
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 2rem;
+  border-top: 1px solid var(--gray-dark);
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Courier New', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  color: var(--gray);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ---------- 21. АДАПТИВ ---------- */
+@media (max-width: 1024px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  /* Бургер появляется, меню прячется в оверлей */
+  .burger { display: block; }
+
+  nav#nav {
+    position: fixed;
+    inset: 0;
+    background: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    z-index: 150;
+  }
+  nav#nav.is-open { transform: translateX(0); }
+  nav#nav ul {
+    flex-direction: column;
+    gap: 2rem;
+    text-align: center;
+  }
+  nav#nav a {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    padding: 1rem 2rem;
+    border: 2px solid transparent;
+  }
+  nav#nav a:hover { border-color: var(--white); }
+
+  body.menu-open { overflow: hidden; }
+
+  /* Прочие мобильные правки */
+  section { padding: 3.5rem 1.1rem; }
+  .hero { padding: 3rem 1.1rem 3.5rem; }
+  .hero::before { width: 250px; height: 250px; opacity: 0.05; }
+  .hero h1 { font-size: clamp(2rem, 9vw, 3rem); }
+  .hero-label { font-size: 0.7rem; letter-spacing: 3px; }
+  .hero p { font-size: 1rem; }
+
+  .btn-group { flex-direction: column; }
+  .btn { width: 100%; }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    margin-bottom: 2.5rem;
+  }
+  .section-header h2 { font-size: clamp(1.5rem, 7vw, 2rem); }
+
+  .sections-grid,
+  .books-grid,
+  .links-grid,
+  .scholars-grid,
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  /* Карточки — компактнее */
+  .section-card,
+  .book-card,
+  .link-card,
+  .scholar-card { padding: 1.4rem; }
+
+  /* Аудио-строки: выстраиваем в колонку */
+  .audio-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 1rem;
+  }
+  .audio-row .num { align-self: flex-start; }
+  .audio-row .info { width: 100%; }
+  .audio-actions { width: 100%; }
+  .audio-actions .audio-btn { flex: 1; }
+
+  /* Плеер: прячем прогресс-бар на маленьких экранах или упрощаем */
+  .player {
+    padding: 0.7rem 0.9rem;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .player-titles .title { font-size: 0.8rem; }
+  .player-titles .subtitle { font-size: 0.6rem; }
+  .player-progress { order: 3; flex-basis: 100%; }
+  .player-cover { width: 40px; height: 40px; }
+  .player-btn { width: 40px; height: 40px; }
+
+  /* Лайтбокс: кнопки внутри, а не снаружи */
+  .lightbox-prev { left: 0.5rem; }
+  .lightbox-next { right: 0.5rem; }
+  .lightbox-btn { width: 46px; height: 46px; font-size: 1.3rem; }
+  .lightbox-close { width: 46px; height: 46px; top: 0.7rem; right: 0.7rem; }
+
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+
+/* Отключаем hover-эффекты на тач-устройствах */
+@media (hover: none) {
+  .section-card:hover,
+  .book-card:hover,
+  .link-card:hover,
+  .scholar-card:hover,
+  .gallery-thumb:hover {
+    transform: none;
+    box-shadow: none;
+    background: inherit;
+    color: inherit;
+  }
+  /* Но оставляем :active для фидбека */
+}
