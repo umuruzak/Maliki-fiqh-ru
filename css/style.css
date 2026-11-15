@@ -593,13 +593,14 @@ section { padding: 6rem 2rem; }
   position: relative;
   cursor: pointer;
 }
-.progress-bar::before {
-  content: '';
+#player-fill {
   position: absolute;
   top: 0; left: 0;
   height: 100%;
-  width: var(--progress, 0%);
+  width: 0%;
   background: var(--white);
+  transition: width 0.15s linear;   
+  pointer-events: none;             
 }
 .progress-bar::after {
   content: '';
@@ -611,6 +612,7 @@ section { padding: 6rem 2rem; }
   border-radius: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
+  transition: left 0.15s linear;
 }
 
 .player-close {

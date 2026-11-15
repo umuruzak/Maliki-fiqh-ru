@@ -35,12 +35,12 @@
     const current = audio.currentTime;
     if (!isFinite(duration) || duration === 0) {
       progressFill.style.width = '0%';
-      progressFill.style.setProperty('--progress', '0%');
+      progressBar.style.setProperty('--progress', '0%');
       return;
     }
     const percent = (current / duration) * 100;
     progressFill.style.width = percent + '%';
-    progressFill.style.setProperty('--progress', percent + '%');
+    progressBar.style.setProperty('--progress', percent + '%');
     timeCurrent.textContent = formatTime(current);
   }
 
@@ -54,7 +54,7 @@
     document.body.classList.add('has-player');
 
     progressFill.style.width = '0%';
-    progressFill.style.setProperty('--progress', '0%');
+    progressBar.style.setProperty('--progress', '0%');
     timeCurrent.textContent = '0:00';
     timeTotal.textContent = '0:00';
 
