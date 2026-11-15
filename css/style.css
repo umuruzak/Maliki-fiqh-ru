@@ -752,20 +752,6 @@ section { padding: 6rem 2rem; }
   object-position: center top;
 }
 
-/* .album-portrait {
-  width: 120px;
-  height: 120px;
-  border: 3px solid currentColor;
-  margin-bottom: 1.2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  overflow: hidden;
-}
-.album-portrait span { border: 1px solid currentColor; } */
-/* .album-portrait span:nth-child(1),
-.album-portrait span:nth-child(4) { background: currentColor; } */
-
 .album-card h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
 .album-card .dates {
   font-family: 'Courier New', monospace;
