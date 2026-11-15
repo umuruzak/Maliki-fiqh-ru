@@ -9,26 +9,7 @@
 </head>
 <body>
 
-  <header>
-    <div class="nav-wrap">
-      <a href="index.html" class="logo">
-        <div class="logo-mark"><span></span><span></span><span></span><span></span></div>
-        <span class="logo-text">Маликитский<br>Мазхаб</span>
-      </a>
-      <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-      <nav id="nav">
-        <ul>
-          <li><a href="books.html">Библиотека</a></li>
-          <li><a href="lectures.html" class="active">Аудиолекции</a></li>
-          <li><a href="recitations.html">Афро-Коранистика</a></li>
-          <li><a href="links.html">Полезные ссылки</a></li>
-          <li><a href="scholars.html">Алимы</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <header id="site-header"></header>
 
   <div class="breadcrumbs">
     <a href="index.html">Главная</a> / <a href="lectures.html">Аудиолекции</a> / <span>Ответы на вопросы</span>
@@ -45,15 +26,15 @@
         <div class="audio-row">
           <div class="num">01</div>
           <div class="info">
-            <h3>О бороде</h3>
+            <h3>«О бороде» от шейха Шади Эльмасри</h3>
             <div class="duration">11:39</div>
           </div>
           <div class="audio-actions">
             <a class="audio-btn" href="assets/audio/qa-01-beard.m4a" download>↓ Скачать</a>
             <button class="audio-btn play js-play"
                     data-src="assets/audio/qa-01-beard.m4a"
-                    data-title="О бороде"
-                    data-sub="Ответы на вопросы · о бороде">
+                    data-title="«О бороде» от шейха Шади Эльмасри"
+                    data-sub="Устаз Исмаил Кривцов">
               <span class="icon-play"></span> Слушать
             </button>
           </div>
@@ -63,18 +44,7 @@
     </div>
   </section>
 
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="logo">
-          <div class="logo-mark"><span></span><span></span><span></span><span></span></div>
-          <span class="logo-text">Маликитский<br>Мазхаб</span>
-        </div>
-        <p>Пространство для изучения маликитской правовой школы.</p>
-      </div>
-      <div><h4>Связаться</h4><ul><li><a href="#">Telegram</a></li><li><a href="#">Email</a></li></ul></div>
-    </div>
-  </footer>
+  <footer id="site-footer"></footer>
 
   <div class="player" id="player">
     <div class="player-info">
@@ -95,6 +65,7 @@
     <button class="player-close" id="player-close" aria-label="Закрыть плеер">×</button>
   </div>
 
+  <script src="js/layout.js"></script>
   <script src="js/menu.js"></script>
   <script src="js/player.js"></script>
 </body>
