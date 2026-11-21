@@ -11,9 +11,20 @@
     'reciter-1.html':      'recitations.html',
     'links.html':          'links.html',
     'albums.html':       'albums.html',
-    'album-1.html':      'albums.html',
-    'album-2.html':      'albums.html',
-    'album-3.html':      'albums.html',
+    'mushaf-maghribi.html':      'albums.html',
+    'mushaf-andalusi.html':      'albums.html',
+    'sheikh-abd-ALLAH-Althaparro.html':      'albums.html',
+    'sheikh-abd-ALLAH-bin-Hamid-Ali.html':      'albums.html',
+    'sheikh-Rami-Nsour.html':      'albums.html',
+    'sheikh-Salek-bin-Siddina.html':      'albums.html',
+    'sheikh-abd-ALLAH-bin-Bayyah.html':      'albums.html',
+    'sheikh-Ahmad-Taha-Rayyan.html':      'albums.html',
+    'sheikh-Ali-Laraki.html':      'albums.html',
+    'sheikh-Farid-al-Baji.html':      'albums.html',
+    'sheikh-Hamza-Yusuf.html':      'albums.html',
+    'sheikh-Issam-Sboui.html':      'albums.html',
+    'sheikh-Shadee-Elmasry.html':      'albums.html',
+    'salah-comics.html':      'albums.html',
   };
 
   const activeSection = PAGE_TO_SECTION[currentPage] || '';
